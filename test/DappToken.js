@@ -26,13 +26,12 @@ contract("DappToken", function(accounts){ // we select the contratc and all the 
 			return tokenInstance.totalSupply();
 		}).then(function(totalSupply){
 			// we test that the total supply is what we specified
-			assert.equal(totalSupply.toNumber(), 100000, "set's the total supply to 100,000");
+			assert.equal(totalSupply.toNumber(), 1000000, "set's the total supply to 100,000");
 			return tokenInstance.balanceOf(accounts[0]);
 		}).then(function(adminBalance){
-			assert.equal(adminBalance.toNumber(), 100000, "allocating the initial supply to admin");
+			assert.equal(adminBalance.toNumber(), 1000000, "allocating the initial supply to admin");
 		});
 	});
-
 
 
 	it("transfer token ownership", function(){
@@ -42,19 +41,34 @@ contract("DappToken", function(accounts){ // we select the contratc and all the 
 			return tokenInstance.transfer.call(accounts[1], 999999999999999);
 		}).then(assert.fail).catch(function(error){
 			assert(error.message.indexOf('revert') >= 0, "error message must contain revert");
-			return tokenInstance.transfer(accounts[1],25000, { from: accounts[0]});
+			return tokenInstance.transfer(accounts[1],250000, { from: accounts[0]});
 		}).then(function(receipt){
 			return tokenInstance.balanceOf(accounts[1]);
 		}).then(function(balance){
-			assert.equal(balance.toNumber(), 25000, "adds the amount to the receiving accounts")
+			assert.equal(balance.toNumber(), 250000, "adds the amount to the receiving accounts")
 			return tokenInstance.balanceOf(accounts[0]);
 		}).then(function(balance){
-			assert.equal(balance.toNumber(), 75000, "deducts the amount")
+			assert.equal(balance.toNumber(), 750000, "deducts the amount")
 		});
-	})
+	});
 
 
-
-
-
+	it('approves tokens for delegated transfer', function() {
+	  return DappToken.deployed().then(function(instance) {
+	    tokenInstance = instance;
+	    return tokenInstance.approve.call(accounts[1], 100);
+	  }).then(function(success) {
+	    assert.equal(success, true, 'it returns true');
+	    return tokenInstance.approve(accounts[1], 100, { from: accounts[0] });
+	  }).then(function(receipt) {
+	    assert.equal(receipt.logs.length, 1, 'triggers one event');
+	    assert.equal(receipt.logs[0].event, 'Approval', 'should be the "Approval" event');
+	    assert.equal(receipt.logs[0].args._owner, accounts[0], 'logs the account the tokens are authorized by');
+	    assert.equal(receipt.logs[0].args._spender, accounts[1], 'logs the account the tokens are authorized to');
+	    assert.equal(receipt.logs[0].args._value, 100, 'logs the transfer amount');
+	    return tokenInstance.allowance(accounts[0], accounts[1]);
+	  }).then(function(allowance) {
+	    assert.equal(allowance.toNumber(), 100, 'stores the allowance for delegated trasnfer');
+	  });
+	});
 });
