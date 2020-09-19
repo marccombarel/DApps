@@ -20,10 +20,10 @@ contract DappToken {
 
 
 	// I.  Initializer function:
-	constructor() public {
+	constructor(uint256 _totalSupply) public {
 		// • we set the initial supply of availoable token for our app
 		// • we allocate all the tokens to the admin (the one that called the function)
-		totalSupply = 1000000;
+		totalSupply = _totalSupply;
 		balanceOf[msg.sender] = 1000000;
 	}
 
