@@ -2,6 +2,7 @@
   "name": "dapp-token-sale",
   "version": "1.0.0",
   "description": "Dapp Token Sale ICO",
+  "type": "module",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
@@ -13,6 +14,7 @@
   "author": "https://github.com/marccombarel",
   "license": "ISC",
   "devDependencies": {
+    "babel-plugin-root-import": "^6.5.0",
     "bootstrap": "^4.5.2",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
