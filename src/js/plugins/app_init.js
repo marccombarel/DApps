@@ -57,6 +57,12 @@ const App = {
 
     // Hydrate the smart contract with values from the blockchain
     App.dappTokenSale = await App.contracts.DappTokenSale.deployed()
+
+
+    const dappToken = await $.getJSON('DappToken.json')
+    App.contracts.DappToken = TruffleContract(dappToken)
+    App.contracts.DappToken.setProvider(App.web3Provider)
+    App.dappToken = await App.contracts.DappToken.deployed()
   },
 
   render: async () => {
@@ -71,8 +77,8 @@ const App = {
     // Render Account
     $('#account').html(App.account)
 
-    // Render Tasks
-    // await App.renderTasks()
+    // Render Tokens
+    await App.loadContract()
 
     // Update loading state
     App.setLoading(false)

@@ -6,80 +6,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Dapp ICO</title>
+
     <!-- Bootstrap -->
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="/css/components/index.css" rel="stylesheet">
   </head>
   <body>
-      <!--     <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease-out" data-easing2="ease-out" role="banner" class="navigation-bar w-nav"> -->
-    <div class="navigation-container">        
-      <a href="/" aria-current="page" class="logo w-inline-block w--current">
-        <img src="https://uploads-ssl.webflow.com/5e0097dfe65e066982db5bee/5e247b60945b296e7c5eeadd_hv-logo-linear.svg" height="60" alt="" class="image-5">
-      </a>
-      <nav role="navigation" class="nav-menu w-nav-menu">
-        <a href="#" class="nav-link w-nav-link">Project</a>
-        <a href="#" class="nav-link w-nav-link">About</a>
-        <a href="#" class="nav-link w-nav-link">White Paper</a>
-        <a href="#" class="nav-link w-nav-link">Team</a>
-        <!-- <a href="https://www.bancor.network/token/HVT" target="_blank" class="nav-link w-nav-link">HVT</a> -->
-        <a href="#" class="nav-link w-nav-link">Login</a>
-        <a href="#" class="nav-link w-nav-link signup">Signup</a>
-      </nav>
-      <!--         <div class="menu-button w-nav-button" style="-webkit-user-select: text;" aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
-          <div class="icon-2 w-icon-nav-menu"> -->     
-      <!-- </div> -->
-    </div>
 
-
-<!--       <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap d-none d-sm-none d-sm-block">
-          <small><a class="nav-link" href="#"><span id="account"></span></a></small>
+  <!-- Nabar -->
+  <div class="navbar navbar-expand-lg navbar-app container">
+    <a class="navbar-brand" href="#">
+      <img src="https://uploads-ssl.webflow.com/5e0097dfe65e066982db5bee/5e247b60945b296e7c5eeadd_hv-logo-linear.svg" alt="" class="logo">  
+    </a>
+    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a href="#" class="nav-link w-nav-link">Project</a>
         </li>
-      </ul> -->
-    
-    
+        <li class="nav-item">
+          <a href="#" class="nav-link w-nav-link">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link w-nav-link">White Paper</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link w-nav-link">Team</a>
+        </li>
+        <li class="nav-item">
+          <a href="https://www.bancor.network/token/HVT" target="_blank" class="nav-link w-nav-link">HVT</a>
+        </li>
+      </ul>
+      <a href="#" class="nav-link w-nav-link">Login</a>
+      <a href="#" class="nav-link w-nav-link signup">Signup</a>
+    </div>
+  </div>
+  
 
-    <div class="container" style="width: 650px;">
-      <div class="row">
-        <div class="col-lg-12">
-            <h1 class="text-center">DAPP TOKEN ICO SALE</h1>
-            <hr/>
-            <br/>
-        </div>
-        <div id="loader">
-          <p class="text-center">Loading...</p>
-        </div>
-        <div id="content" class="text-center" style="display: none;">
-          <p>
-            Introducing "DApp Token" (DAPP)!
-            Token price is <span class="token-price"></span> Ether. You currently have <span class="dapp-balance"></span>&nbsp;DAPP.
-          </p>
+
+  <!-- Main Content -->
+  <div class="main container">
+    <small><a class="nav-link" href="#"><span id="account"></span></a></small>
+  
+    <br>
+    <br>
+    <br>
+  
+    <div class="row">
+      <div class="col-lg-12">
+          <h1 class="text-center">DAPP TOKEN ICO SALE</h1>
+          <hr/>
           <br/>
-          <form onSubmit="App.buyTokens(); return false;" role="form">
-            <div class="form-group">
-              <div class="input-group">
-                <input id="numberOfTokens" class="form-control input-lg" type="number" name="number" value="1" min="1" pattern="[0-9]">
-                </input>
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-primary btn-lg">Buy Tokens</button>
-                </span>
-              </div>
+      </div>
+      <div id="loader">
+        <p class="text-center">Loading...</p>
+      </div>
+      <div id="content" class="text-center" style="display: none;">
+        <p>
+          Introducing "DApp Token" (DAPP)!
+          Token price is <span class="token-price"></span> Ether. You currently have <span class="dapp-balance"></span>&nbsp;DAPP.
+        </p>
+        <br/>
+        <form onSubmit="App.buyTokens(); return false;" role="form">
+          <div class="form-group">
+            <div class="input-group">
+              <input id="numberOfTokens" class="form-control input-lg" type="number" name="number" value="1" min="1" pattern="[0-9]">
+              </input>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary btn-lg">Buy Tokens</button>
+              </span>
             </div>
-          </form>
-          <br>
-           <div class="progress">
-              <div id="progress" class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100">
-              </div>
+          </div>
+        </form>
+        <br>
+         <div class="progress">
+            <div id="progress" class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100">
             </div>
-          <p><span class="tokens-sold"></span> / <span class="tokens-available"></span> tokens sold</p>
-          <hr>
-          <p id="accountAddress"></p>
-        </div>
+          </div>
+        <p><span class="tokens-sold"></span> / <span class="tokens-available"></span> tokens sold</p>
+        <hr>
+        <p id="accountAddress"></p>
       </div>
     </div>
+  </div>
 
+
+
+
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
