@@ -2,15 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Dapp ICO</title>
-
+    <title>My Dapp</title>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/css/components/index.css" rel="stylesheet">
   </head>
+
   <body>
 
   <!-- Nabar -->
@@ -24,70 +25,60 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a href="#" class="nav-link w-nav-link">Project</a>
+          <a href="#" class="nav-link w-nav-link" id="fund-ico">ICO</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link w-nav-link">About</a>
+          <a href="#" class="nav-link w-nav-link">Project</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link w-nav-link">White Paper</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link w-nav-link">Team</a>
+          <a href="#" class="nav-link w-nav-link">About</a>
         </li>
-        <li class="nav-item">
-          <a href="https://www.bancor.network/token/HVT" target="_blank" class="nav-link w-nav-link">HVT</a>
-        </li>
+        <!-- <li class="nav-item"> -->
+          <!-- <a href="https://www.bancor.network/token/HVT" target="_blank" class="nav-link w-nav-link">HVT</a> -->
+        <!-- </li> -->
       </ul>
       <a href="#" class="nav-link w-nav-link">Login</a>
       <a href="#" class="nav-link w-nav-link signup">Signup</a>
     </div>
   </div>
   
-
-
-  <!-- Main Content -->
-  <div class="main container">
-    <small><a class="nav-link" href="#"><span id="account"></span></a></small>
-  
-    <br>
-    <br>
-    <br>
-  
-    <div class="row">
-      <div class="col-lg-12">
-          <h1 class="text-center">DAPP TOKEN ICO SALE</h1>
-          <hr/>
-          <br/>
-      </div>
-      <div id="loader">
-        <p class="text-center">Loading...</p>
-      </div>
-      <div id="content" class="text-center" style="display: none;">
-        <p>
-          Introducing "DApp Token" (DAPP)!
-          Token price is <span class="token-price"></span> Ether. You currently have <span class="dapp-balance"></span>&nbsp;DAPP.
-        </p>
-        <br/>
-        <form onSubmit="App.buyTokens(); return false;" role="form">
-          <div class="form-group">
-            <div class="input-group">
-              <input id="numberOfTokens" class="form-control input-lg" type="number" name="number" value="1" min="1" pattern="[0-9]">
-              </input>
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary btn-lg">Buy Tokens</button>
-              </span>
-            </div>
-          </div>
-        </form>
+  <!-- Modal For ICO -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="loader">
+      <p class="text-center">Please Connect to your Metamask Wallet...</p>
+    </div>
+    <div class="modal-dialog modal-dialog-centered" role="document" id="content">
+      <div class="modal-content container bg-transparent border-0">
+        <h2>We are raising funds</h2> 
+        <p>Take part in our ICO</p>
         <br>
-         <div class="progress">
-            <div id="progress" class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100">
-            </div>
-          </div>
-        <p><span class="tokens-sold"></span> / <span class="tokens-available"></span> tokens sold</p>
         <hr>
-        <p id="accountAddress"></p>
+        <div class="modal-body">
+          <p class="token-conversion">1<span id="token-name"></span> = <span id="token-price"></span>ETH</p>
+          <form onSubmit="App.buyTokens(); return false;" role="form">
+            <div class="form-group">
+              <div class="input-group">
+                <input id="numberOfTokens" class="form-control input-lg" type="number" name="number" value="1" min="1" pattern="[0-9]">
+                </input>
+              </div>
+            <br>
+            <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-lg">Buy Tokens</button></span>
+          </form>
+          <br>
+          <br>
+          <br>
+          <div class="progress">
+            <div id="progress" class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p><span id="remaining-tokens"></span> remaining tokens <br> out of <span id="initial-token-supply"></span></p>
+          
+          <hr>
+          
+          <p id="accountAddress"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -97,13 +88,28 @@
 
 
 
-    <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<!--   <div class="premium premium-header"><div class="container"><div class="row cc-bottom row-header"><div class="_2-row-image cc-bottom"><img src="https://uploads-ssl.webflow.com/5e0097dfe65e066982db5bee/5e68d453abaae712100b28e0_5e014e4f6e14ef8ce16f9bc7_hv-hero%201.svg" width="660" alt="" class="image-8"></div><div class="_2-row-text cc-bottom w-clearfix"><h2 class="h2 cc-2-rows"><span class="text-span text-span-h1"><strong>Find jobs, earn rewards, help the planet</strong><br></span></h2><p class="paragraph cc-gray paragraph-darker paragraph-header">Recruiters; use HireVibes to increase applications and referrals to your vacancies. Talent; apply and refer to job listings and earn crypto rewards for you, the HireVibes community and a qualified charity of your choice.<a href="https://app.hirevibes.io/signup"><strong><br></strong></a></p><a href="https://app.hirevibes.io/jobs" class="button-2 w-button">See Job Listings</a></div></div></div></div> -->
+
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
     <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
 
     <script src="./js/app.js" type="module"></script>
